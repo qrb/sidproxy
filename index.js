@@ -1,4 +1,4 @@
-var proxy = require('./lib/proxy'),
+var Proxy = require('./lib/proxy'),
     log = require('./lib/log');
 
 function Server(logging) {
@@ -7,25 +7,36 @@ function Server(logging) {
     }
 
     this.logging = logging;
-    this.proxy = proxy;
+    this.paths = [];
 }
 
-Server.prototype.resolveProxy = function(path, host) {
-    this.proxy.resolve(path, host);
+Server.prototype.resolveProxy = function(items) {
+    for (var i = 0; i < items.length; i++) {
+        this.paths.push(new Proxy(items[i].path, items[i].host, items[i].name));
+    }
+
     return this.handle.bind(this);
 };
 
 Server.prototype.handle = function(req, res, next) {
+    var _proxy = false;
 
-    if (!this.proxy.shouldHandle(req.url)) {
+    for(var i = 0; i < this.paths.length; i++ ) {
+        if (this.paths[i].shouldHandle(req.url)) {
+            _proxy = this.paths[i];
+        }
+    }
+
+    if (!_proxy) {
         return next();
     }
 
     if (this.logging) {
-        this.proxy.pipe(req, res, log.httpProxy.bind(log));
+        _proxy.pipe(req, res, log.httpProxy.bind(log));
     } else {
-        this.proxy.pipe(req, res);
+        _proxy.pipe(req, res);
     }
+
 };
 
 module.exports = function(logging) {
