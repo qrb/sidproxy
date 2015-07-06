@@ -12,7 +12,7 @@ function Server(logging) {
 
 Server.prototype.resolveProxy = function(items) {
     for (var i = 0; i < items.length; i++) {
-        this.paths.push(new Proxy(items[i].path, items[i].host, items[i].name));
+        this.paths.push(new Proxy(items[i].path.replace(/^\.{2}/, ''), items[i].host, items[i].name));
     }
 
     return this.handle.bind(this);
