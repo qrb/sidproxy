@@ -10,7 +10,8 @@
     "type": "git",
     "url": "git://github.com/qrb/sidproxy.git"
   },
-  "author": "Lee tagg",
+  "keywords": ["proxy", "http", "console", "log"],
+  "author": "Lee Tagg <lee@anycode.io>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/qrb/sidproxy/issues"
