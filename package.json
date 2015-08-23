@@ -1,16 +1,21 @@
 {
   "name": "sidproxy",
-  "version": "1.0.5",
-  "description": "Simple Development Proxy and Http console",
+  "version": "1.0.6",
+  "description": "Simple dev proxy with pretty request output",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodeunit"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/qrb/sidproxy.git"
   },
-  "keywords": ["proxy", "http", "console", "log"],
+  "keywords": [
+    "proxy",
+    "http",
+    "console",
+    "log"
+  ],
   "author": "Lee Tagg <lee@anycode.io>",
   "license": "MIT",
   "bugs": {
@@ -20,5 +25,8 @@
   "dependencies": {
     "colors": "^1.0.3",
     "request": "^2.55.0"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
   }
 }

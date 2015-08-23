@@ -1,12 +1,12 @@
 var Proxy = require('./lib/proxy'),
     log = require('./lib/log');
 
-function Server(logging) {
-    if (logging == undefined) {
-        logging = true;
+function Server(verbose) {
+    if (verbose == undefined) {
+        verbose = true;
     }
 
-    this.logging = logging;
+    this.logging = verbose;
     this.paths = [];
 }
 
@@ -39,6 +39,6 @@ Server.prototype.handle = function(req, res, next) {
 
 };
 
-module.exports = function(logging) {
-    return new Server(logging);
+module.exports = function(verbose) {
+    return new Server(verbose);
 };
